@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Raleway');
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Open Sans', sans-serif;
+}
+p,input,label,a,span{
+    font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+    font-size: 340%;
+    text-align: center;
+}
+
+.row{
+ 
+    max-width: 100%;
+}
+.buscar{
+    width: 100%;
+    padding: 2%;
+}
+.buscar tr th{
+    padding: 4%;
+    padding: 2%;
+    color: #fff;
+    background: #e74c3c;
+
+}
+.buscar tr td p{
+    text-align: center;
+}
+label {
+    font-size: 150%;
+    padding: 1%;
+    padding-left: 0%;
+    width: 100%;
+}
+
+input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #333;
+    padding: 1%;
+}
+
+select {
+    width: 100%;
+    border: none;
+}
+
+p {
+    padding: 1%;
+}
+
+input[type="submit"] {
+    width: 20%;
+    border-bottom: none;
+    margin-top: 2%;
+    background-color: #c0392b;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: .5px 1px 2px #333;
+}
+.sidebar{
+    height: 100vh;
+    padding: 1%;
+    background-color: #333;
+}
+.sidebar h2{
+    color: #fff;
+    text-align: center;
+    padding: 2%;
+}
+.sidebar nav ul li h4 a{
+    width: 100%;
+    list-style: none;
+    text-align: left;
+    text-decoration: none;
+    padding: 1%;
+    color : #fff;
+    
+}
+.menu li{
+    padding: 1%;
+}
+.sidebar nav ul li h4{
+    color : #fff;
+    font-size: 150%;
+}
+.sidebar nav ul li h4 i{
+    margin-right: 10px;
+}
+.slider nav ul li a{
+    color:#16a085;
+}
+.subca{
+    display: none;
+}
+.act{
+    display: block;
+    transition: 5s all;
+}
+.sidebar nav ul li ul li a{
+    padding: .5%;
+    color: #16a085;
+    transition: .5s all;
+    display: inline;
+}
+.sidebar nav ul li ul li a:hover{
+    color: #1abc9c;
+    font-size: 150%;
+    text-decoration: none;
+    transition: .5s all;
+}
+
