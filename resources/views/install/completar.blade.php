@@ -1,6 +1,6 @@
-@extends("../layout.app") @section("content")
+@extends("../install.arch") @section("content")
 <div class="row">
-    <h1>Ya casi terminamos</h1>
+    <h1>Ya casi terminamos <strong>{{$Usuario->last()->user}}</strong></h1>
     <hr>
 </div>
 @if(count($errors) > 0)
@@ -17,7 +17,7 @@
         {{csrf_field()}}
         <div class="row">
            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-               <h2>Estas llenando los datos de: <strong>{{$Usuario->last()->user}}</strong></h2><br>
+           <br><br>
            <p>Estamos completando tu registro, porfavor indicanos los siguientes datos.</p>
            <input type="number" name="id" value="{{$Usuario->last()->IdPer}}" style="display: none;" >
             </div>

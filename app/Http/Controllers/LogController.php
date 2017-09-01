@@ -7,6 +7,7 @@ use App\cargo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UseRequest;
+use App\Http\Controllers\funcionesayudas;
 
 class LogController extends Controller
 {
@@ -14,38 +15,31 @@ class LogController extends Controller
         return view("log.register");
     }
     public  function store(UseRequest $request){
-
-    
-    
-    echo $useo = getId($id); 
-        
-        
+    $id=0;
+    $useo = funcionesayudas::getId($id); 
     DB::table('personas')->insert(['Id' => $useo+1]);
     DB::table('users')->insert(
     ['Identificador' => $request->get('Identificador'), 
      'user' => $request->get('User'), 
-     'password' => $request->get('Password'),
+     'password' => bcrypt($request->get('Password')),
      'IdPer' => $useo+1,
      'Idestado' => 0]);
+    return redirect()->Route('completarInfo')->with("id", $id);
 
-    return redirect()->Route('completarInfo');
-
-    }
-    function getId($id){
- $odontograma =  DB::table('users')->select('IdPer')->where('IdPer', DB::raw("(select max(`IdPer`) from users)"))->get();
-     foreach ($odontograma as $o) {
-				return $o->id;
-    }
     }
     public  function create(){
-     $cargos = cargo::all();
-     $use = usu::all();
-     $IdPersona = $use->last();
-     return View("log.completar", ["perso"=>$IdPersona])->with("cargo", $cargos)->with("Usuario", $use);
+        $id=0;
+        $cargos = cargo::all();
+        $useo = funcionesayudas::getId($id);
+        $users = DB::table('users')
+                ->where('IdPer', $useo)
+                ->get();
+        $personas = DB::table('personas')
+                ->where('Id', $useo)
+                ->get();
+     return View("log.completar", ["perso"=>$personas])->with("Usuario", $users)->with("cargo", $cargos);
     }
     public  function show(){
-    $use = usu::all();
-    $persona = persona::all();
-    return View("app.dashboard")->with("use", $use)->with("persona", $persona);
+    return View("app.dashboard");
 }
 }

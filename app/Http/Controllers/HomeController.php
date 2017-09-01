@@ -11,7 +11,7 @@ use App\Http\Requests\finauser;
 class HomeController extends Controller
 {
      public function index(){
-        return view("install.index");
+        return ;
     }
     
     public function store(UseRequest $request){
@@ -28,7 +28,7 @@ class HomeController extends Controller
     DB::table('users')->insert(
     ['Identificador' => $request->get('Identificador'), 
      'user' => $request->get('User'), 
-     'password' => $request->get('Password'),
+     'password' => bcrypt($request->get('Password')),
      'IdPer' => 0,
      'Idestado' => 0]);
         
@@ -44,8 +44,6 @@ class HomeController extends Controller
         DB::table('personas')
                 ->orderBy('Id', 'desc')
                 ->get();
-        $user = new usu;
-        $use = $user::all();
         $id = $request->get('id');
             DB::table('personas')
             ->where('id', $id)
@@ -54,7 +52,7 @@ class HomeController extends Controller
                       'Telefono' => $request->get('Telefono'),
                       'Cargo' => $request->get('cargo')]);
         
-    return view ("app.dashboard")->with("use", $use);
+    return redirect()->route("/buscar");
     }
     public  function show(){
 

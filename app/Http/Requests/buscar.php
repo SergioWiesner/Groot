@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UseRequest extends FormRequest
+class buscar extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,7 @@ class UseRequest extends FormRequest
     public function rules()
     {
         return [
-            'Identificador' => 'required|int',
-            'User' => 'required|string|max:20',
-            'Password' => 'required'
+            'busqueda' => ''
         ];
     }
 }
