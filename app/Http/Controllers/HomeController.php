@@ -1,57 +1,40 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
 use App\usu;
 use App\persona;
-use Illuminate\Support\Facades\DB;
-use App\Http\Requests\UseRequest;
+use App\busqueda;
+use Illuminate\Http\Request;
 use App\Http\Requests\finauser;
+use App\Http\Requests\UseRequest;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ActualizarDatos;
+use App\Http\Controllers\funcionesayudas;
 
 class HomeController extends Controller
 {
-     public function index(){
-        return ;
+     public function index(ActualizarDatos $request){
+         
+         $datos = ['IdPer' => $request->get('IdPer'), 'user' => $request->get('user'), 'Idestado' => $request->get('Idestado'), 'Identificador' => $request->get('Identificador'), 'Nombres' => $request->get('Nombres'), 'Correo' => $request->get('correo'), 'Telefono' => $request->get('Telefono'), 'Cargo' => $request->get('Cargo')];
+         $busque = busqueda::ActualizarTodosDatos($datos);
     }
     
     public function store(UseRequest $request){
-        DB::table('users')
-                ->orderBy('IdPer', 'desc')
-                ->get();
-        DB::table('personas')
-                ->orderBy('Id', 'desc')
-                ->get();
-    $user = new usu;
-    $persona = new persona;     
-    $fecha = new \DateTime();
-    DB::table('personas')->insert(['Id' => 0]);
-    DB::table('users')->insert(
-    ['Identificador' => $request->get('Identificador'), 
-     'user' => $request->get('User'), 
-     'password' => bcrypt($request->get('Password')),
-     'IdPer' => 0,
-     'Idestado' => 0]);
-        
-    return redirect()->route('completarInfo', ["IdPersona" => $persona]);
+        $reg = [ 'Identificador' => $request->get('Identificador'), 'User' => $request->get('User'), 'Password' => bcrypt($request->get('Password')), 'Id' => 0];
+        $useo = funcionesayudas::PrimerRegistro($reg);
+        if($useo){
+            $id = 0;
+            return redirect()->route('completarInfo');
+        }else{
+            return redirect()->route('/');
+        }
+    
     }
     
-    
-    
     public  function update(finauser $request){
-        DB::table('users')
-                ->orderBy('IdPer', 'desc')
-                ->get();
-        DB::table('personas')
-                ->orderBy('Id', 'desc')
-                ->get();
-        $id = $request->get('id');
-            DB::table('personas')
-            ->where('id', $id)
-            ->update(['Nombres' => $request->get('Nombres'), 
-                      'correo' => $request->get('correo'),
-                      'Telefono' => $request->get('Telefono'),
-                      'Cargo' => $request->get('cargo')]);
+    $datos = ['IdPer' => $request->get('IdPer'), 'user' => $request->get('user'), 'Idestado' => $request->get('Idestado'), 'Identificador' => $request->get('Identificador'), 'Nombres' => $request->get('Nombres'), 'Correo' => $request->get('correo'), 'Telefono' => $request->get('Telefono'), 'Cargo' => $request->get('Cargo')];
         
+         $busque = busqueda::ActualizarTodosDatos($datos);    
     return redirect()->route("/buscar");
     }
     public  function show(){

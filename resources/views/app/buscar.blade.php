@@ -7,16 +7,17 @@
 </div>
 <div class="row" onload="busq('')">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        {!! Form::open(['route' => '/buscar', 'method' => 'get', 'role' => 'search']) !!} {{csrf_field()}}
+        {!! Form::open(['route' => '/buscar', 'method' => 'get', 'role' => 'search']) !!}
+        {{csrf_field()}}
         <div class="container">
             <div class="row">
                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                    <input type="text" name="busqueda" placeholder="Buscar">
+                    <input type="text" name="busqueda" placeholder="Buscar por identificador o usuario">
                 </div>
                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                     <input type="submit" name="buscar" value="buscar">
                 </div>
-
+             <p>Hay  usuarios activos</p>
             </div>
             {!! Form::close() !!}
             <hr> @if(count($errors) > 0)
@@ -44,7 +45,7 @@
                             <h3>Cargo</h3>
                         </th>
                         <th>
-                            <h3></h3>
+                            <h3>Estado</h3>
                         </th>
                         <th>
                             <h3></h3>
@@ -68,7 +69,10 @@
                             <p>{{$respuesta->Nombres}}</p>
                         </td>
                         <td>
-                            <p>{{$respuesta->Cargo}}</p>
+                            <p>{{$respuesta->Nomcargo}}</p>
+                        </td>
+                        <td>
+                            <p>{{$respuesta->NombrEstado}}</p>
                         </td>
                         <td>
                             <p>

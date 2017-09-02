@@ -4,7 +4,7 @@
         <h1>¿Vamos a agregar a un nuevo usuario?</h1>
         <hr>
         <h2>Empezemos ...</h2>
-        <p>Idica los siguietes datos</p>
+        <p>Indica los siguietes datos</p>
     </div>
 </div>
 @if(count($errors) > 0)
@@ -19,7 +19,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <form action="{{route('regist')}}" method="Post">
+            <form action="{{route('/regist')}}" method="post">
                 {{csrf_field()}}
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

@@ -1,6 +1,6 @@
 @extends("../layout.app") @section("content")
 <div class="row">
-    <h1>Ya casi terminamos</h1>
+    <h1>Ya casi terminamos <strong></strong></h1>
     <hr>
 </div>
 @if(count($errors) > 0)
@@ -12,14 +12,15 @@
 </ul>
 </div>
 @endif
+@foreach($Usuario as $Usuari)
 <div class="container">
-       {!! Form::model($perso, ['method' => 'PATCH', 'route' =>['finalizar']]) !!}
+       <form action="{{route('finalizar')}}" method="post">
         {{csrf_field()}}
         <div class="row">
            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-               <h2>Estas llenando los datos de: <strong>{{$Usuario->last()->user}}</strong></h2><br>
+           <br><br>
            <p>Estamos completando tu registro, porfavor indicanos los siguientes datos.</p>
-           <input type="number" name="id" value="{{$Usuario->last()->IdPer}}" style="display: none;" >
+           <input type="number" name="id" value="{{$Usuari->IdPer}}" style="display: none;" >
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -37,8 +38,8 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <label for="cargo">Cargo</label>
                     <select name="cargo" id="cargo" required>
-                @foreach($cargo as $cargos)
-                <option value="{{$cargos->Cargo}}">{{$cargos->Nomcargo}}</option>
+                @foreach($cargos as $cargo)
+                <option value="{{$cargo->Cargo}}">{{$cargo->Nomcargo}}</option>
                 @endforeach
             </select>
                 </div>
@@ -46,26 +47,32 @@
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <label>Usuario</label>
-                    <p>{{$Usuario->last()->user}}</p>
+                    <p>{{$Usuari->user}}</p>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <label>Identificador</label>
-                    <p>{{$Usuario->last()->Identificador}}</p>
+                    <p>{{$Usuari->Identificador}}</p>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <label>Estado</label>
-                    <p>{{$Usuario->last()->Idestado}}</p>
+                    <label for="Estado">Estado</label>
+                    <select name="Estado" id="Estado" required>
+                @foreach($esta as $estado)
+                <option value="{{$estado->idEstado}}">{{$estado->NombrEstado}}</option>
+                @endforeach
+            </select>
+                    <p>{{$Usuari->IdEstado}}</p>
                 </div>
                 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <label>ID</label>
-                <p>{{$Usuario->last()->IdPer}}</p>
-                <input type="hidden" name="id" value="{{$Usuario->last()->IdPer}}">
+                <p>{{$Usuari->IdPer}}</p>
+                <input type="hidden" name="id" value="{{$Usuari->IdPer}}">
                 </div>
             </div>
         </div>
             <input type="submit" name="sub" value="Terminar">
             <input type="reset" name="sub" value="Borrar">
-    </div>
-        {!! Form::close() !!}
+    </form>
+       </div>
+        @endforeach
 <hr> @endsection
